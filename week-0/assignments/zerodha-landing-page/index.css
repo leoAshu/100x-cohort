@@ -99,5 +99,6 @@ main {
 }
 
 .content .button:hover {
+    cursor: pointer;
     background-color: #555;
 }

@@ -3,12 +3,11 @@ function sum(num1, num2, callback) {
 }
 
 function displayResult(data) {
-    console.log('Result of the sum is: ' + data);
+    console.log('Result of the sum is: ' + data)
 }
 
-
 function displayResultPassive(data) {
-    console.log('Sum\'s result is: ' + data);
+    console.log("Sum's result is: " + data)
 }
 
 // You are only allowed to call one function after this

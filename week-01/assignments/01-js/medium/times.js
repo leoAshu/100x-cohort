@@ -12,14 +12,14 @@ function calculateTime(n) {
     const start = new Date()
 
     let sum = 0
-    for (let i=1; i<=n; i++) {
+    for (let i = 1; i <= n; i++) {
         sum += i
     }
 
     const end = new Date()
-    return (end - start) / 1000;
+    return (end - start) / 1000
 }
 
-console.log(calculateTime(100));
-console.log(calculateTime(100000));
-console.log(calculateTime(1000000000));
+console.log(calculateTime(100))
+console.log(calculateTime(100000))
+console.log(calculateTime(1000000000))

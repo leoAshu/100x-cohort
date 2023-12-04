@@ -1,5 +1,6 @@
-html, body {
-    font-family: "Inter",serif;
+html,
+body {
+    font-family: 'Inter', serif;
     font-size: 16px;
     color: #424242;
     line-height: 1.7;
@@ -84,7 +85,7 @@ main {
     margin-top: 25px;
     background-color: #387ed1;
     color: #fff;
-    border: 1px solid rgba(0,0,0,0) !important;
+    border: 1px solid rgba(0, 0, 0, 0) !important;
     border-radius: 3px;
     display: inline-block;
     padding: 10px 30px;

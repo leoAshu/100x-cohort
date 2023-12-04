@@ -5,34 +5,34 @@
 */
 
 function isAnagram(str1, str2) {
-  if (str1.length !== str2.length) {
-    return false
-  } 
-  
-  str1 = str1.toLowerCase()
-  str2 = str2.toLowerCase()
-
-  map = {}
-  for (let i=0; i<str1.length; i++) {
-    if (str1[i] in map) {
-      map[str1[i]] += 1
-    } else {
-      map[str1[i]] = 1
+    if (str1.length !== str2.length) {
+        return false
     }
 
-    if (str2[i] in map) {
-      map[str2[i]] -= 1
-    } else {
-      map[str2[i]] = -1
-    }
-  }
+    str1 = str1.toLowerCase()
+    str2 = str2.toLowerCase()
 
-  for (const [_, value] of Object.entries(map)) {
-    if (value !== 0) {
-      return false
+    map = {}
+    for (let i = 0; i < str1.length; i++) {
+        if (str1[i] in map) {
+            map[str1[i]] += 1
+        } else {
+            map[str1[i]] = 1
+        }
+
+        if (str2[i] in map) {
+            map[str2[i]] -= 1
+        } else {
+            map[str2[i]] = -1
+        }
     }
-  }
-  return true
+
+    for (const [_, value] of Object.entries(map)) {
+        if (value !== 0) {
+            return false
+        }
+    }
+    return true
 }
 
-module.exports = isAnagram;
+module.exports = isAnagram

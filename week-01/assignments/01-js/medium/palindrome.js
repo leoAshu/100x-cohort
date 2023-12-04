@@ -4,7 +4,18 @@
 */
 
 function isPalindrome(str) {
-  return true;
+  str = str.toLowerCase()
+
+  validChars = []
+  for (let i=0; i<str.length; i++) {
+    const charCode = str[i].charCodeAt(0)
+    if (charCode >= 97 && charCode <= 122) {
+      validChars.push(str[i])
+    }
+  }
+  str = validChars.join('')
+
+  return str === str.split('').reverse().join('');
 }
 
 module.exports = isPalindrome;

@@ -35,9 +35,6 @@ async function calculateTime() {
     const start = new Date()
 
     await Promise.all([waitOneSecond(), waitTwoSecond(), waitThreeSecond()])
-    // await waitOneSecond()
-    // await waitTwoSecond()
-    // await waitThreeSecond()
 
     const end = new Date()
     console.log(`Time waited: ${(end - start) / 1000} seconds`)

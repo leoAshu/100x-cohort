@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const jwtPassword = '123456'
 
 const app = express()
+app.use(express.json())
 
 const ALL_USERS = [
     {

@@ -25,6 +25,11 @@ const ALL_USERS = [
 function userExists(username, password) {
     // write logic to return true or false if this user exists
     // in ALL_USERS array
+    const user = ALL_USERS.find((user) => user.username === username && user.password === password)
+    if (user) {
+        return true
+    }
+    return false
 }
 
 app.post('/signin', function (req, res) {
@@ -37,7 +42,7 @@ app.post('/signin', function (req, res) {
         })
     }
 
-    var token = jwt.sign({ username: username }, 'shhhhh')
+    var token = jwt.sign({ username: username }, jwtPassword)
     return res.json({
         token,
     })
@@ -48,7 +53,14 @@ app.get('/users', function (req, res) {
     try {
         const decoded = jwt.verify(token, jwtPassword)
         const username = decoded.username
+
         // return a list of users other than this username
+        const users = []
+        ALL_USERS.forEach((user) => {
+            if (user.username !== username) {
+                users.push({ name: user.name, username: user.username })
+            }
+        })
     } catch (err) {
         return res.status(403).json({
             msg: 'Invalid token',
@@ -56,4 +68,6 @@ app.get('/users', function (req, res) {
     }
 })
 
-app.listen(3000)
+app.listen(3000, () => {
+    console.log('Server started at port 3000.')
+})

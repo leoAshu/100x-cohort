@@ -56,11 +56,8 @@ app.get('/users', function (req, res) {
         const username = decoded.username
 
         // return a list of users other than this username
-        const users = []
-        ALL_USERS.forEach((user) => {
-            if (user.username !== username) {
-                users.push({ name: user.name, username: user.username })
-            }
+        res.json({
+            users: ALL_USERS.filter((user) => user.username !== username),
         })
     } catch (err) {
         return res.status(403).json({

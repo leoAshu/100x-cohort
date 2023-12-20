@@ -1,7 +1,10 @@
 const mongoose = require('mongoose')
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://ashutoshojha2009:123412312@cluster0.tqadczh.mongodb.net/100xCohort')
+mongoose
+    .connect('mongodb+srv://ashutoshojha2009:123412312@cluster0.tqadczh.mongodb.net/100xCohort')
+    .then(() => console.log('DB connected'))
+    .catch((err) => console.log(err))
 
 // Define schemas
 const AdminSchema = new mongoose.Schema({
@@ -15,12 +18,10 @@ const UserSchema = new mongoose.Schema({
 })
 
 const CourseSchema = new mongoose.Schema({
-    id: { type: Number, required: true },
     title: { type: String, required: true },
     description: { type: String },
     price: { type: Number, required: true },
     imageLink: { type: String },
-    published: { type: Boolean },
 })
 
 const Admin = mongoose.model('Admin', AdminSchema)

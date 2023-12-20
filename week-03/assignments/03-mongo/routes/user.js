@@ -2,6 +2,7 @@ const { Router } = require('express')
 const router = Router()
 const userMiddleware = require('../middleware/user')
 const { User } = require('../db')
+const generateUniqueId = require('../utils')
 
 // User Routes
 router.route('/signup').post(async (req, res) => {
@@ -15,6 +16,7 @@ router.route('/signup').post(async (req, res) => {
     }
 
     const user = new User({
+        id: generateUniqueId(),
         username: username,
         password: password,
     })

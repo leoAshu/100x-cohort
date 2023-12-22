@@ -5,7 +5,7 @@ const { User, Course } = require('../db')
 const generateUniqueId = require('../utils')
 
 // User Routes
-router.route('/signup').post(async (req, res) => {
+router.post('/signup', async (req, res) => {
     // Implement user signup logic
     const { username, password } = req.body
 
@@ -25,13 +25,13 @@ router.route('/signup').post(async (req, res) => {
     res.status(200).json({ msg: 'User signup successful' })
 })
 
-router.route('/courses').get(async (req, res) => {
+router.get('/courses', async (req, res) => {
     // Implement listing all courses logic
     const courses = await Course.find({})
     res.status(200).json({ courses })
 })
 
-router.route('/courses/:courseId').post(userMiddleware, async (req, res) => {
+router.post('/courses/:courseId', userMiddleware, async (req, res) => {
     // Implement course purchase logic
     const username = req.headers.username
     const courseId = req.params.courseId
@@ -47,7 +47,7 @@ router.route('/courses/:courseId').post(userMiddleware, async (req, res) => {
     res.status(200).json({ msg: 'Course purchase successful' })
 })
 
-router.route('/purchasedCourses').get(userMiddleware, async (req, res) => {
+router.get('/purchasedCourses', userMiddleware, async (req, res) => {
     // Implement fetching purchased courses logic
     const username = req.headers.username
 

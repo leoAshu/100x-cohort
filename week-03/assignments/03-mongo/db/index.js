@@ -17,6 +17,7 @@ const UserSchema = new mongoose.Schema({
     id: { type: String, required: true, unique: true },
     username: { type: String, required: true },
     password: { type: String, required: true },
+    purchasedCourses: { type: [String], required: true },
 })
 
 const CourseSchema = new mongoose.Schema({

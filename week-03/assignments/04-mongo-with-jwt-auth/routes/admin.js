@@ -5,7 +5,6 @@ const generateUniqueId = require('../utils')
 const jwt = require('jsonwebtoken')
 
 const router = Router()
-const secret = 'secret'
 
 // Admin Routes
 router.post('/signup', async (req, res) => {
@@ -37,7 +36,7 @@ router.post('/signin', async (req, res) => {
         return
     }
 
-    const token = jwt.sign({ username, password }, secret)
+    const token = jwt.sign({ username, password }, 'secret')
 
     res.status(200).json({ token })
 })

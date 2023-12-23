@@ -5,11 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document Object Model</title>
         <script>
-            function calculateSum() {
-                const a = parseFloat(document.getElementById('first').value)
-                const b = parseFloat(document.getElementById('second').value)
+            async function calculateSum() {
+                const a = parseInt(document.getElementById('first').value)
+                const b = parseInt(document.getElementById('second').value)
 
-                const result = a + b
+                const response = await fetch(`https://sum-server.100xdevs.com/sum?a=${a}&b=${b}`)
+
+                // const result = a + b
+                const result = await response.text()
 
                 document.getElementById('result').innerText = `Sum is ${result}`
             }

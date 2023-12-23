@@ -1,1 +1,37 @@
 # Week 4
+
+## Debouncing
+
+-   optimizes api calls in usecases like search suggestions
+-   delays sending api requests
+
+```
+// Basic Debouncing
+
+let timeout
+function debouncedCalculateSum() {
+    // delay the call to calculateSum until debouncedCalculateSum has not been called for 100 ms
+    // and has been called atleast once
+
+    // clear timeout if it has been called again while the previous clock is still running
+    clearTimeout(timeout)
+
+    // start a new clock
+    timeout = setTimeout(() => {
+        calculateSum()
+    }, 100)
+}
+
+async function calculateSum() {
+    const a = parseInt(document.getElementById('first').value)
+    const b = parseInt(document.getElementById('second').value)
+
+    const response = await fetch(`https://sum-server.100xdevs.com/sum?a=${a}&b=${b}`)
+
+    const result = await response.text()
+
+    document.getElementById('result').innerText = `Sum is ${result}`
+}
+```
+
+## Throttling

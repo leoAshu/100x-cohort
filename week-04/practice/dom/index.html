@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document Object Model</title>
+    </head>
+    <body>
+        <script>
+            function calculateSum() {
+                const a = parseFloat(document.getElementById('first').value)
+                const b = parseFloat(document.getElementById('second').value)
+
+                const result = a + b
+
+                document.getElementById('result').innerText = `Sum is ${result}`
+            }
+        </script>
+        <input id="first" placeholder="First number" type="number" name="value_1" />
+        <br />
+        <br />
+        <input id="second" placeholder="Second number" type="number" name="value_2" />
+        <br />
+        <br />
+        <button onclick="calculateSum()">Calculate Sum</button>
+        <br />
+        <p id="result"></p>
+    </body>
+</html>

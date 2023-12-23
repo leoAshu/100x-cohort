@@ -10,6 +10,10 @@ app.use(bodyParser.json())
 app.use('/admin', adminRouter)
 app.use('/user', userRouter)
 
+app.get('/', (req, res) => {
+    res.status(200).json({ msg: 'Server is live' })
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })

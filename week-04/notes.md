@@ -4,6 +4,7 @@
 
 -   optimizes api calls in usecases like search suggestions
 -   delays sending api requests
+-   is called `Throttling` when the same implemented in the backend
 
 ```
 // Basic Debouncing
@@ -33,5 +34,3 @@ async function calculateSum() {
     document.getElementById('result').innerText = `Sum is ${result}`
 }
 ```
-
-## Throttling

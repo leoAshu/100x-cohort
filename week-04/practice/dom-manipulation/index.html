@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TODO</title>
+        <script>
+            let globalId = 0
+
+            function markAsDone(todoId) {
+                const todoElement = document.getElementById(todoId)
+                todoElement.setAttribute('style', 'text-decoration: line-through;')
+                todoElement.children[2].setAttribute('style', 'display: none;')
+            }
+
+            function createTodoElement(todoId, title, description) {
+                const titleElement = document.createElement('p')
+                titleElement.innerText = title
+
+                const descriptionElement = document.createElement('p')
+                descriptionElement.innerText = description
+
+                const button = document.createElement('button')
+                button.innerText = 'Mark as done'
+                button.setAttribute('onclick', `markAsDone(${todoId})`)
+
+                const todoElement = document.createElement('div')
+                todoElement.setAttribute('id', `${todoId}`)
+                todoElement.appendChild(titleElement)
+                todoElement.appendChild(descriptionElement)
+                todoElement.appendChild(button)
+
+                return todoElement
+            }
+
+            function addTodo() {
+                const title = document.getElementById('title').value
+                const description = document.getElementById('description').value
+                const container = document.getElementById('container')
+
+                container.appendChild(createTodoElement(globalId++, title, description))
+            }
+        </script>
+    </head>
+    <body>
+        <input id="title" placeholder="Title" />
+        <br />
+        <br />
+        <input id="description" placeholder="Description" />
+        <br />
+        <br />
+        <button onclick="addTodo()">Add</button>
+        <div id="container"></div>
+    </body>
+</html>

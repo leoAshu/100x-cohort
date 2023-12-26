@@ -6,8 +6,22 @@
             let todoState = []
             let oldTodoState = []
 
-            function addTodo() {
+            function addNewTodo(todo) {
                 // big function we wrote in the beginning
+                const container = document.getElementById('todos')
+
+                const titleElement = document.createElement('p')
+                titleElement.innerText = todo.title
+
+                const descriptionElement = document.createElement('p')
+                descriptionElement.innerText = todo.description
+
+                const todoElement = document.createElement('div')
+                todoElement.setAttribute('id', todo.id)
+                todoElement.appendChild(titleElement)
+                todoElement.appendChild(descriptionElement)
+
+                container.appendChild(todoElement)
             }
 
             function removeTodo(todo) {

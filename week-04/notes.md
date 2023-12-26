@@ -34,3 +34,12 @@ async function calculateSum() {
     document.getElementById('result').innerText = `Sum is ${result}`
 }
 ```
+
+## Why React?
+
+-   creating a dynamic website using DOM manipulations is very inefficient
+-   React library makes this process efficient by comparing states and doing the minimal operations needed to update the state
+-   React's sole purpose is to find the diff between old and new states
+-   the actual operations are defined in separate libraries used by React
+    -   React-DOM for websites
+    -   React Native for native mobile apps

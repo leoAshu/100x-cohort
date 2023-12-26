@@ -40,6 +40,7 @@ async function calculateSum() {
 -   creating a dynamic website using DOM manipulations is very inefficient
 -   React library makes this process efficient by comparing states and doing the minimal operations needed to update the state
 -   React's sole purpose is to find the diff between old and new states
+    -   is platform-agnostic
 -   the actual operations are defined in separate libraries used by React
     -   ReactDOM for websites
     -   ReactNative for native mobile apps

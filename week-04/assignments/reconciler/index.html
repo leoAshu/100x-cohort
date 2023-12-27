@@ -6,6 +6,28 @@
             let todoState = []
             let oldTodoState = []
 
+            function markAsDone(id) {
+                todoState = todoState.filter((todo) => todo.id != id)
+                updateState(todoState)
+            }
+
+            function findIndexById(list, idToFind) {
+                for (let i = 0; i < list.length; i++) {
+                    if (list[i].id === idToFind) {
+                        return i // Return the index if the object with the given id is found
+                    }
+                }
+                return -1 // Return -1 if the object with the given id is not found
+            }
+
+            function updateTodoTitle(id) {
+                const index = findIndexById(todoState, id)
+                if (index !== -1) {
+                    todoState[index] = { ...todoState[index], title: `Updated: ${todoState[index]}` }
+                    updateState(todoState)
+                }
+            }
+
             function addNewTodo(todo) {
                 // big function we wrote in the beginning
                 const container = document.getElementById('todos')
@@ -16,17 +38,27 @@
                 const descriptionElement = document.createElement('p')
                 descriptionElement.innerText = todo.description
 
+                const button = document.createElement('button')
+                button.innerText = 'Mark as done'
+                button.setAttribute('onclick', `markAsDone(${todo.id})`)
+
+                const updateButton = document.createElement('button')
+                updateButton.innerText = 'Update'
+                updateButton.setAttribute('onclick', `updateTodoTitle(${todo.id})`)
+
                 const todoElement = document.createElement('div')
                 todoElement.setAttribute('id', todo.id)
                 todoElement.appendChild(titleElement)
                 todoElement.appendChild(descriptionElement)
+                todoElement.appendChild(button)
+                todoElement.appendChild(updateButton)
 
                 container.appendChild(todoElement)
             }
 
             function removeTodo(todo) {
                 const element = document.getElementById(todo.id)
-                element.parent.removeChild(element)
+                element.parentElement.removeChild(element)
             }
 
             function updateTodo(oldTodo, newTodo) {
@@ -45,10 +77,56 @@
                 const added = []
                 const deleted = []
                 const updated = []
+
+                console.log('Before:')
+                console.log(oldTodoState, 'oldTodoState')
+                console.log(newTodos, 'newTodos')
+                console.log(added, 'added')
+                console.log(deleted, 'deleted')
+                console.log(updated, 'updated')
+
+                // added and updated todos
+                newTodos.forEach((element) => {
+                    const filtered = oldTodoState.filter((todo) => todo.id === element.id)
+                    if (filtered.length === 0) {
+                        added.push(element)
+                    } else {
+                        const oldElement = filtered[0]
+                        if (
+                            !(
+                                oldElement.id === element.id &&
+                                oldElement.title === element.title &&
+                                oldElement.description === element.description
+                            )
+                        ) {
+                            updated.push(element)
+                        }
+                    }
+                })
+
+                // deleted todos
+                oldTodoState.forEach((element) => {
+                    const filtered = newTodos.filter((todo) => todo.id === element.id)
+                    if (filtered.length === 0) {
+                        deleted.push(element)
+                    }
+                })
+
+                added.forEach(addNewTodo)
+                deleted.forEach(removeTodo)
+                updated.forEach(updateTodo)
+
                 // calculate these 3 arrays
                 // call addTodo, removeTodo, updateTodo functions on each of the
                 // elements
-                oldTodoState = newTodos
+                oldTodoState = newTodos.slice()
+
+                console.log('After:')
+                console.log(oldTodoState, 'oldTodoState')
+                console.log(newTodos, 'newTodos')
+                console.log(added, 'added')
+                console.log(deleted, 'deleted')
+                console.log(updated, 'updated')
             }
 
             function addTodo() {

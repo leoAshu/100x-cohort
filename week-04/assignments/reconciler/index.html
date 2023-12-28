@@ -6,29 +6,27 @@
             let todoState = []
             let oldTodoState = []
 
-            function markAsDone(id) {
-                todoState = todoState.filter((todo) => todo.id != id)
+            function findById(list, id) {
+                for (let i = 0; i < list.length; i++) {
+                    if (list[i].id === id) {
+                        return i
+                    }
+                }
+                return -1
+            }
+
+            function markAsDone(todoId) {
+                const idx = findById(todoState, todoId)
+                if (idx !== -1) {
+                    todoState[idx] = {
+                        ...todoState[idx],
+                        completed: true
+                    }
+                }
                 updateState(todoState)
             }
 
-            function findIndexById(list, idToFind) {
-                for (let i = 0; i < list.length; i++) {
-                    if (list[i].id === idToFind) {
-                        return i // Return the index if the object with the given id is found
-                    }
-                }
-                return -1 // Return -1 if the object with the given id is not found
-            }
-
-            function updateTodoTitle(id) {
-                const index = findIndexById(todoState, id)
-                if (index !== -1) {
-                    todoState[index] = { ...todoState[index], title: `Updated: ${todoState[index]}` }
-                    updateState(todoState)
-                }
-            }
-
-            function addNewTodo(todo) {
+            function addDOM(todo) {
                 // big function we wrote in the beginning
                 const container = document.getElementById('todos')
 
@@ -39,33 +37,28 @@
                 descriptionElement.innerText = todo.description
 
                 const button = document.createElement('button')
-                button.innerText = 'Mark as done'
+                button.innerText = 'Mark as Done'
                 button.setAttribute('onclick', `markAsDone(${todo.id})`)
-
-                const updateButton = document.createElement('button')
-                updateButton.innerText = 'Update'
-                updateButton.setAttribute('onclick', `updateTodoTitle(${todo.id})`)
 
                 const todoElement = document.createElement('div')
                 todoElement.setAttribute('id', todo.id)
                 todoElement.appendChild(titleElement)
                 todoElement.appendChild(descriptionElement)
                 todoElement.appendChild(button)
-                todoElement.appendChild(updateButton)
 
                 container.appendChild(todoElement)
             }
 
-            function removeTodo(todo) {
+            function removeDOM(todo) {
                 const element = document.getElementById(todo.id)
                 element.parentElement.removeChild(element)
             }
 
-            function updateTodo(oldTodo, newTodo) {
-                const element = document.getElementById(oldTodo.id)
-                element.children[0].innerHTML = newTodo.title
-                element.children[1].innerHTML = newTodo.description
-                element.children[0].innerHTML = newTodo.completed ? 'Mark as done' : 'Done'
+            function updateDOM(updatedTodo) {
+                const element = document.getElementById(updatedTodo.id)
+                element.children[0].innerHTML = updatedTodo.title
+                element.children[1].innerHTML = updatedTodo.description
+                element.children[2].innerHTML = updatedTodo.completed ? 'Done' : 'Mark as Done'
             }
 
             function updateState(newTodos) {
@@ -78,13 +71,6 @@
                 const deleted = []
                 const updated = []
 
-                console.log('Before:')
-                console.log(oldTodoState, 'oldTodoState')
-                console.log(newTodos, 'newTodos')
-                console.log(added, 'added')
-                console.log(deleted, 'deleted')
-                console.log(updated, 'updated')
-
                 // added and updated todos
                 newTodos.forEach((element) => {
                     const filtered = oldTodoState.filter((todo) => todo.id === element.id)
@@ -93,6 +79,7 @@
                     } else {
                         const oldElement = filtered[0]
                         if (
+                            Object.keys(oldElement).length !== Object.keys(element).length ||
                             !(
                                 oldElement.id === element.id &&
                                 oldElement.title === element.title &&
@@ -112,21 +99,14 @@
                     }
                 })
 
-                added.forEach(addNewTodo)
-                deleted.forEach(removeTodo)
-                updated.forEach(updateTodo)
+                added.forEach(addDOM)
+                deleted.forEach(removeDOM)
+                updated.forEach(updateDOM)
 
                 // calculate these 3 arrays
                 // call addTodo, removeTodo, updateTodo functions on each of the
                 // elements
                 oldTodoState = newTodos.slice()
-
-                console.log('After:')
-                console.log(oldTodoState, 'oldTodoState')
-                console.log(newTodos, 'newTodos')
-                console.log(added, 'added')
-                console.log(deleted, 'deleted')
-                console.log(updated, 'updated')
             }
 
             function addTodo() {

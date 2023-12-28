@@ -26,7 +26,7 @@
                 updateState(todoState)
             }
 
-            function addDOM(todo) {
+            function addTodoToDom(todo) {
                 // big function we wrote in the beginning
                 const container = document.getElementById('todos')
 
@@ -49,12 +49,12 @@
                 container.appendChild(todoElement)
             }
 
-            function removeDOM(todo) {
+            function removeTodoFromDom(todo) {
                 const element = document.getElementById(todo.id)
                 element.parentElement.removeChild(element)
             }
 
-            function updateDOM(updatedTodo) {
+            function updateTodoInDom(updatedTodo) {
                 const element = document.getElementById(updatedTodo.id)
                 element.children[0].innerHTML = updatedTodo.title
                 element.children[1].innerHTML = updatedTodo.description
@@ -99,9 +99,9 @@
                     }
                 })
 
-                added.forEach(addDOM)
-                deleted.forEach(removeDOM)
-                updated.forEach(updateDOM)
+                added.forEach(addTodoToDom)
+                deleted.forEach(removeTodoFromDom)
+                updated.forEach(updateTodoInDom)
 
                 // calculate these 3 arrays
                 // call addTodo, removeTodo, updateTodo functions on each of the

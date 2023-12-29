@@ -10,13 +10,13 @@ async function userMiddleware(req, res, next) {
 
         const userExists = await User.findOne({ username, password })
         if (!userExists) {
-            res.status(403).json({ error: "User doesn't exist" })
+            res.status(403).json({ error: 'You are not authenticated' })
             return
         }
         req.headers.username = username
         next()
     } catch (err) {
-        res.status(400).json({ error: 'Invalid token' })
+        res.status(403).json({ error: 'You are not authenticated' })
     }
 }
 

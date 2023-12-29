@@ -7,7 +7,6 @@ const router = Router()
 
 // User Routes
 router.post('/signup', async (req, res) => {
-    // Implement user signup logic
     const { username, password } = req.body
 
     const userExists = await User.findOne({ username })
@@ -16,22 +15,20 @@ router.post('/signup', async (req, res) => {
         return
     }
 
-    const user = new User({
-        id: generateUniqueId(),
-        username: username,
-        password: password
+    await User.create({
+        username,
+        password
     })
-    await user.save()
-    res.status(200).json({ msg: 'User signup successful' })
+
+    res.status(200).json({ msg: 'User created successfully' })
 })
 
 router.post('/signin', async (req, res) => {
-    // Implement admin signin logic
     const { username, password } = req.body
 
     const userExists = await User.findOne({ username, password })
     if (!userExists) {
-        res.status(404).json({ err: 'Invalid credentials' })
+        res.status(403).json({ err: "User doesn't exist" })
         return
     }
 
@@ -41,41 +38,31 @@ router.post('/signin', async (req, res) => {
 })
 
 router.get('/courses', async (req, res) => {
-    // Implement listing all courses logic
     const courses = await Course.find({})
     res.status(200).json({ courses })
 })
 
 router.post('/courses/:courseId', userMiddleware, async (req, res) => {
-    // Implement course purchase logic
     const username = req.headers.username
     const courseId = req.params.courseId
 
-    const user = await User.findOne({ username })
-    if (user.purchasedCourses.indexOf(courseId) !== -1) {
-        res.status(400).json({ err: 'Course already purchased' })
-        return
-    }
-    user.purchasedCourses.push(courseId)
-    await user.save()
+    await User.updateOne({ username }, { $push: { purchasedCourses: courseId } })
 
-    res.status(200).json({ msg: 'Course purchase successful' })
+    res.status(200).json({ msg: 'Course purchased successfully' })
 })
 
 router.get('/purchasedCourses', userMiddleware, async (req, res) => {
-    // Implement fetching purchased courses logic
     const username = req.headers.username
 
     const user = await User.findOne({ username })
-    const purchasedCourseIds = user.purchasedCourses
 
-    const purchasedCourses = await Promise.all(
-        purchasedCourseIds.map(async (id) => {
-            return await Course.findOne({ id })
-        })
-    )
+    const courses = await Course.find({
+        _id: {
+            $in: user.purchasedCourses
+        }
+    })
 
-    res.status(200).json({ courses: purchasedCourses })
+    res.status(200).json({ courses })
 })
 
 module.exports = router

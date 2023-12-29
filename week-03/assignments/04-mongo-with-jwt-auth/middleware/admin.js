@@ -11,13 +11,13 @@ async function adminMiddleware(req, res, next) {
 
         const adminExists = await Admin.findOne({ username, password })
         if (!adminExists) {
-            res.status(403).json({ error: "User doesn't exist" })
+            res.status(403).json({ error: 'You are not authenticated' })
             return
         }
         req.headers.username = username
         next()
     } catch (err) {
-        res.status(400).json({ error: 'Invalid token' })
+        res.status(403).json({ error: 'You are not authenticated' })
     }
 }
 

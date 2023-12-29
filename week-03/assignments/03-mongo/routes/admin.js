@@ -1,7 +1,6 @@
 const { Router } = require('express')
 const adminMiddleware = require('../middleware/admin')
 const { Admin, Course } = require('../db')
-const generateUniqueId = require('../utils')
 const router = Router()
 
 // Admin Routes
@@ -14,44 +13,36 @@ router.post('/signup', async (req, res) => {
         return
     }
 
-    const admin = new Admin({
-        id: generateUniqueId(),
+    await Admin.create({
         username: username,
-        password: password,
+        password: password
     })
-    await admin.save()
-    res.status(200).json({ msg: 'Admin signup successful' })
+    res.status(200).json({ msg: 'Admin created successfully' })
 })
 
 router.post('/courses', adminMiddleware, async (req, res) => {
-    const username = req.headers.username
-    const { title, description, price, image } = req.body
+    const { title, description, price, imageLink } = req.body
 
-    const courseExists = await Course.findOne({ title, description, price })
+    const courseExists = await Course.findOne({ title, description })
     if (courseExists) {
-        res.status(400).json({ err: 'Course already exists' })
+        res.status(403).json({ err: 'Course already exists' })
         return
     }
 
-    const course = new Course({
-        id: generateUniqueId(),
+    const newCourse = await Course.create({
         title,
         description,
-        price,
-        image,
-        createdBy: username,
+        imageLink,
+        price
     })
 
-    await course.save()
-    res.status(200).json({ msg: 'Course creation successful' })
+    res.status(200).json({ msg: 'Course created successfully', courseId: newCourse._id })
 })
 
 router.get('/courses', adminMiddleware, async (req, res) => {
-    const username = req.headers.username
+    const courses = await Course.find({})
 
-    const courses = await Course.find({ createdBy: username })
-
-    res.status(202).json({ courses })
+    res.status(200).json({ courses })
 })
 
 module.exports = router

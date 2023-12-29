@@ -107,3 +107,30 @@ app.listen(port, () => {
 });
 
 ```
+
+## Databases
+
+-   key feature of a database is to store data persistently
+-   provides additional features to query, delete and update data
+-   alows applications to be scalable by removing the state, i.e. data from the app to a separate database and making the applications stateless
+-   examples of data stored in databases for Linkedin
+    -   user data
+    -   user posts
+    -   user connection relationships
+    -   messages
+-   allow access to 4 primitives
+    -   Create data
+    -   Read data
+    -   Update data
+    -   Delete data
+    -   aka CRUD
+
+> Note:
+>
+> -   To get data from a database, a user hits an http server
+> -   This server in turn fetches the data from the database and returns to the user
+> -   Why don't we let the user hit the database directly? What extra does the http server provide exactly?
+>     -   Databases were created using protocols not understood by browsers
+>     -   Databases don't provide granular access. The either provide all the data or none of it
+>     -   Some databases (Firebase) do allow us to get rid of the http server and try their best to provide granular access
+>     -   Http servers in the middle also allow for user authentication checks

@@ -10,7 +10,7 @@ async function userMiddleware(req, res, next) {
 
         const userExists = await User.findOne({ username, password })
         if (!userExists) {
-            res.status(400).json({ error: 'Invalid credentials' })
+            res.status(403).json({ error: "User doesn't exist" })
             return
         }
         req.headers.username = username

@@ -8,25 +8,26 @@ mongoose
 
 // Define schemas
 const AdminSchema = new mongoose.Schema({
-    id: { type: String, required: true, unique: true },
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true }
+    username: String,
+    password: String
 })
 
 const UserSchema = new mongoose.Schema({
-    id: { type: String, required: true, unique: true },
-    username: { type: String, required: true },
-    password: { type: String, required: true },
-    purchasedCourses: { type: [String], required: true }
+    username: String,
+    password: String,
+    purchasedCourses: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Course'
+        }
+    ]
 })
 
 const CourseSchema = new mongoose.Schema({
-    id: { type: String, required: true, unique: true },
-    title: { type: String, required: true },
-    description: { type: String },
-    price: { type: Number, required: true },
-    image: { type: String },
-    createdBy: { type: String }
+    title: String,
+    description: String,
+    imageLink: String,
+    price: Number
 })
 
 const Admin = mongoose.model('Admin', AdminSchema)

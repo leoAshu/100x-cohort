@@ -134,3 +134,17 @@ app.listen(port, () => {
 >     -   Databases don't provide granular access. The either provide all the data or none of it
 >     -   Some databases (Firebase) do allow us to get rid of the http server and try their best to provide granular access
 >     -   Http servers in the middle also allow for user authentication checks
+
+### MongoDB
+
+-   is a structureless database
+-   the data need not follow a defined structure
+-   allows inserting data of different structure into the same collection
+
+#### Mongoose
+
+-   is a package that facilitates interaction with MongoDB
+-   needs to define a schema as the first step
+    -   counter-intuitive to the schema-less MongoDB
+    -   does so to make db interactions safe and valid
+    -   is like a safety abstraction layer on MongoDB similar to TypeScript over JavaScript

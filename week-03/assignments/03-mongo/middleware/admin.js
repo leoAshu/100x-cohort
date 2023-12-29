@@ -9,7 +9,7 @@ async function adminMiddleware(req, res, next) {
 
     const adminExists = await Admin.findOne({ username, password })
     if (!adminExists) {
-        res.status(400).json({ error: 'Invalid credentials' })
+        res.status(403).json({ error: "User doesn't exist" })
         return
     }
     next()

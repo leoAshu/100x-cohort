@@ -124,6 +124,10 @@ app.listen(port, () => {
     -   Update data
     -   Delete data
     -   aka CRUD
+-   3 jargons to know in Databases
+    -   Cluster
+    -   Database
+    -   Table
 
 > Note:
 >
@@ -149,12 +153,14 @@ app.listen(port, () => {
     -   does so to make db interactions safe and valid
     -   is like a safety abstraction layer on MongoDB similar to TypeScript over JavaScript
 
-````
+```
 // Defining Schema
 
 const UserSchema = new mongoose.Schema({
     email: String,
     password: String,
+
+    // this is how relationships are defined in MongoDB
     purchasedCourses: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -166,5 +172,5 @@ const UserSchema = new mongoose.Schema({
 const CourseSchema = new mongoose.Schema({
     title: String,
     price: 5999
-})```
-````
+})
+```

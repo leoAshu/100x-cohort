@@ -148,3 +148,23 @@ app.listen(port, () => {
     -   counter-intuitive to the schema-less MongoDB
     -   does so to make db interactions safe and valid
     -   is like a safety abstraction layer on MongoDB similar to TypeScript over JavaScript
+
+````
+// Defining Schema
+
+const UserSchema = new mongoose.Schema({
+    email: String,
+    password: String,
+    purchasedCourses: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Course'
+        }
+    ]
+})
+
+const CourseSchema = new mongoose.Schema({
+    title: String,
+    price: 5999
+})```
+````

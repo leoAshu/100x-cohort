@@ -59,11 +59,9 @@ function App() {
     const [todos, setTodos] = useState([])
 
     useEffect(() => {
-        await fetch('https://sum-server.100xdevs.com/todos')
-            .then(async function(res) {
-                const json = await res.json()
-                setTodos(json.todos)
-            })
+        axios.get('https://sum-server.100xdevs.com/todos').then(function (response) {
+            setTodos(response.data.todos)
+        })
     }, [])
 
     return (

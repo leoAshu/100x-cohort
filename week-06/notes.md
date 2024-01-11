@@ -109,3 +109,49 @@ function App() {
 
 export default App
 ```
+
+### useCallback
+
+-   similar to `useMemo`
+-   instead of values, used to memoize functions with an objective to optimize the performance of the application
+-   especially in cases involving child components that rely on **reference equality** to prevent unnecessary renders
+
+```javascript
+import { memo, useCallback, useState } from 'react'
+
+function App() {
+    const [count, setCount] = useState(0)
+
+    // function childFunction() {
+    //     console.log('child clicked')
+    // }
+    const childFunction = useCallback(() => {
+        console.log('child clicked')
+    }, [])
+
+    return (
+        <div>
+            <Child onClick={childFunction} />
+            <button
+                onClick={() => {
+                    setCount(count + 1)
+                }}
+            >
+                Parent: Click me {count}
+            </button>
+        </div>
+    )
+}
+
+const Child = memo(({ childFunction }) => {
+    console.log('child render')
+
+    return (
+        <div>
+            <button onClick={childFunction}>Child: Button clicked</button>
+        </div>
+    )
+})
+
+export default App
+```

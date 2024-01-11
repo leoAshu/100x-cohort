@@ -24,6 +24,8 @@ function App() {
     )
 }
 
+// memo is used here to skip re-rendering this component if its props are unchanged
+// is needed in conjunction with useCallback hook to make the example work
 const Child = memo(({ onClick }) => {
     console.log('child render')
 

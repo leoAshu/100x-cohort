@@ -115,6 +115,7 @@ export default App
 -   similar to `useMemo`
 -   instead of values, used to memoize functions with an objective to optimize the performance of the application
 -   especially in cases involving child components that rely on **reference equality** to prevent unnecessary renders
+-   child components should be marked as `memo` components to avoid re-renders if props is unchanged
 
 ```javascript
 import { memo, useCallback, useState } from 'react'
@@ -157,6 +158,11 @@ const Child = memo(({ childFunction }) => {
 
 export default App
 ```
+
+### useRef
+
+-   used to get reference to DOM elements
+-   alternative React's way of `document.getElement`
 
 ### Custom Hooks
 

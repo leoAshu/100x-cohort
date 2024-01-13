@@ -12,3 +12,9 @@
 -   provides only the bundle required to render the route
 -   bundles for other routes will not be included
 -   optimizes the web app
+
+## Prop Drilling
+
+## Context API
+
+-   helps avoid prop drilling

@@ -1,8 +1,8 @@
-import React, { Suspense, lazy } from 'react'
+import { Suspense, lazy } from 'react'
 import { BrowserRouter, Link, Route, Routes, useNavigate } from 'react-router-dom'
 
-const Dashboard = React.lazy(() => import('./pages/Dashboard'))
-const Landing = React.lazy(() => import('./pages/Landing'))
+const Dashboard = lazy(() => import('./pages/Dashboard'))
+const Landing = lazy(() => import('./pages/Landing'))
 
 function App() {
     return (

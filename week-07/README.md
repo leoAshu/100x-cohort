@@ -107,3 +107,69 @@ export default App
 -   an `atom` can store the state, smallest unit of state
 -   it can be defined outside the component
 -   it can be teleported to any component
+
+```javascript
+// store/atoms/count.jsx
+import { atom } from 'recoil'
+
+const countAtom = atom({
+    key: 'countAtom',
+    default: 0
+})
+
+export default countAtom
+
+
+// App.jsx
+import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil'
+import countAtom from './store/atoms/count'
+
+function App() {
+    return (
+        <RecoilRoot>
+            <Count />
+        </RecoilRoot>
+    )
+}
+
+function Count() {
+    console.log('count render')
+    return (
+        <>
+            <CountRenderer />
+            <Buttons />
+        </>
+    )
+}
+
+function CountRenderer() {
+    const count = useRecoilValue(countAtom)
+    return <div>{count}</div>
+}
+
+function Buttons() {
+    const [count, setCount] = useRecoilState(countAtom)
+    return (
+        <div>
+            <button
+                onClick={() => {
+                    setCount(count + 1)
+                }}
+            >
+                Increment
+            </button>
+
+            <button
+                onClick={() => {
+                    setCount(count - 1)
+                }}
+            >
+                Decrement
+            </button>
+        </div>
+    )
+}
+
+export default App
+
+```

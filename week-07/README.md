@@ -19,7 +19,7 @@
 -   state manages by a parent component is required by a child component deep down in the component tree
 -   needs unncessarily passing down the state via props through all the components in the path until the specific child component
 
-## Context API
+#### Context API
 
 -   helps avoid prop drilling by teleporting the state directly to the child components that require i
 -   involves three steps
@@ -29,6 +29,8 @@
 -   only provides syntactical sugar to avoid passing state through props
 -   does not fix the unnecessary re-renders
     -   in the example below, even if context not used in Counter, it still re-renders
+    -   state management libraries like `Recoil` solve this issue
+-   in summary, context api only makes syntax cleaner (get rid of prop drilling) and not to make rendering more efficient
 
 ```javascript
 // CountContext.jsx
@@ -90,3 +92,18 @@ function Buttons({ setCount }) {
 
 export default App
 ```
+
+### Recoil
+
+-   is a state management library
+-   creates an ideal separation of concern between state and components
+-   prevents unnecessary re-renders of components not using the state
+-   other similar libraries
+    -   zustand
+    -   redux
+
+#### Atom
+
+-   an `atom` can store the state, smallest unit of state
+-   it can be defined outside the component
+-   it can be teleported to any component

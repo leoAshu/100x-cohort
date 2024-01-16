@@ -12,6 +12,7 @@ function App() {
 }
 
 function Count({ setCount }) {
+    console.log('count render')
     return (
         <>
             <CountRenderer />

@@ -25,6 +25,7 @@ function CountRenderer() {
 }
 
 function Buttons() {
+    console.log('buttons render')
     const setCount = useSetRecoilState(countAtom)
     return (
         <div>

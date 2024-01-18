@@ -109,69 +109,83 @@ export default App
 -   it can be teleported to any component
 
 ```javascript
-// store/atoms/count.jsx
+// atoms.js
 import { atom } from 'recoil'
 
-const countAtom = atom({
-    key: 'countAtom',
+export const networkAtom = atom({
+    key: 'networkAtom',
+    default: 102
+})
+
+export const jobsAtom = atom({
+    key: 'jobsAtom',
     default: 0
 })
 
-export default countAtom
+export const notificationsAtom = atom({
+    key: 'notificationsAtom',
+    default: 12
+})
 
+export const messagingAtom = atom({
+    key: 'messagingAtom',
+    default: 0
+})
 
 // App.jsx
-import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil'
-import countAtom from './store/atoms/count'
+import { RecoilRoot, useRecoilValue } from 'recoil'
+import { jobsAtom, messagingAtom, networkAtom, notificationsAtom, totalNotificationSelector } from './atoms'
 
 function App() {
     return (
         <RecoilRoot>
-            <Count />
+            <MainApp />
         </RecoilRoot>
     )
 }
 
-function Count() {
-    console.log('count render')
+function MainApp() {
+    const networkNotificationCount = useRecoilValue(networkAtom)
+    const jobsAtomCount = useRecoilValue(jobsAtom)
+    const notificationsAtomCount = useRecoilValue(notificationsAtom)
+    const messagingAtomCount = useRecoilValue(messagingAtom)
+    const totalNotificationCount = useRecoilValue(totalNotificationSelector)
+
     return (
         <>
-            <CountRenderer />
-            <Buttons />
+            <button>Home</button>
+
+            <button>My network ({networkNotificationCount >= 100 ? '99+' : networkNotificationCount})</button>
+            <button>Jobs ({jobsAtomCount})</button>
+            <button>Messaging ({messagingAtomCount})</button>
+            <button>Notifications ({notificationsAtomCount})</button>
+
+            <button>Me ({totalNotificationCount})</button>
         </>
     )
 }
 
-function CountRenderer() {
-    const count = useRecoilValue(countAtom)
-    return <div>{count}</div>
-}
-
-function Buttons() {
-    const [count, setCount] = useRecoilState(countAtom)
-    return (
-        <div>
-            <button
-                onClick={() => {
-                    setCount(count + 1)
-                }}
-            >
-                Increment
-            </button>
-
-            <button
-                onClick={() => {
-                    setCount(count - 1)
-                }}
-            >
-                Decrement
-            </button>
-        </div>
-    )
-}
-
 export default App
-
 ```
 
 #### Selectors
+
+-   similar to atoms, but are derived from atoms
+-   don't have a default value, instead performs a pure function on a state/atom and returns it
+-   replacement for `useMemo` use-cases
+
+```javascript
+// atoms.js
+import { selector } from 'recoil'
+
+export const totalNotificationSelector = selector({
+    key: 'totalNotificationSelector',
+    get: ({ get }) => {
+        const networkAtomCount = get(networkAtom)
+        const jobsAtomCount = get(jobsAtom)
+        const notificationsAtomCount = get(notificationsAtom)
+        const messagingAtomCount = get(messagingAtom)
+        return networkAtomCount + jobsAtomCount + notificationsAtomCount + messagingAtomCount
+    }
+})
+```

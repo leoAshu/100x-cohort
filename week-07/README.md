@@ -112,29 +112,19 @@ export default App
 // atoms.js
 import { atom } from 'recoil'
 
-export const networkAtom = atom({
+export const notifications = atom({
     key: 'networkAtom',
-    default: 102
-})
-
-export const jobsAtom = atom({
-    key: 'jobsAtom',
-    default: 0
-})
-
-export const notificationsAtom = atom({
-    key: 'notificationsAtom',
-    default: 12
-})
-
-export const messagingAtom = atom({
-    key: 'messagingAtom',
-    default: 0
+    default: {
+        network: 4,
+        jobs: 6,
+        messaging: 3,
+        notifications: 3
+    }
 })
 
 // App.jsx
 import { RecoilRoot, useRecoilValue } from 'recoil'
-import { jobsAtom, messagingAtom, networkAtom, notificationsAtom, totalNotificationSelector } from './atoms'
+import { notifications, totalNotificationSelector } from './atoms'
 
 function App() {
     return (
@@ -145,20 +135,17 @@ function App() {
 }
 
 function MainApp() {
-    const networkNotificationCount = useRecoilValue(networkAtom)
-    const jobsAtomCount = useRecoilValue(jobsAtom)
-    const notificationsAtomCount = useRecoilValue(notificationsAtom)
-    const messagingAtomCount = useRecoilValue(messagingAtom)
+    const networkCount = useRecoilValue(notifications)
     const totalNotificationCount = useRecoilValue(totalNotificationSelector)
 
     return (
         <>
             <button>Home</button>
 
-            <button>My network ({networkNotificationCount >= 100 ? '99+' : networkNotificationCount})</button>
-            <button>Jobs ({jobsAtomCount})</button>
-            <button>Messaging ({messagingAtomCount})</button>
-            <button>Notifications ({notificationsAtomCount})</button>
+            <button>My network ({networkCount.networks >= 100 ? '99+' : networkCount.networks})</button>
+            <button>Jobs ({networkCount.jobs})</button>
+            <button>Messaging ({networkCount.messaging})</button>
+            <button>Notifications ({networkCount.notifications})</button>
 
             <button>Me ({totalNotificationCount})</button>
         </>

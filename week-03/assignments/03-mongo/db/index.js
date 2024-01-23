@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 // Connect to MongoDB
 mongoose
-    .connect('mongodb+srv://ashutoshojha2009:123412312@cluster0.tqadczh.mongodb.net/100xCohort')
+    .connect('db url')
     .then(() => console.log('DB connected'))
     .catch((err) => console.log(err))
 

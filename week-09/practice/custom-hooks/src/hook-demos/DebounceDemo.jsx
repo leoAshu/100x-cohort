@@ -6,12 +6,15 @@ const DebounceDemo = () => {
     const debouncedValue = useDebounce(inputValue, 1000)
 
     return (
-        <input
-            type="text"
-            value={debouncedValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Search..."
-        />
+        <>
+            Debounced value is {debouncedValue}
+            <input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder="Search..."
+            />
+        </>
     )
 }
 

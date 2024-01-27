@@ -1,6 +1,6 @@
 import useFetchTodos from '../hooks/useFetchTodos'
 
-const FetchTodosHookDemo = () => {
+const FetchTodosDemo = () => {
     const { todos, loading } = useFetchTodos(5)
 
     if (loading) {
@@ -28,4 +28,4 @@ function Track({ todo }) {
     )
 }
 
-export default FetchTodosHookDemo
+export default FetchTodosDemo

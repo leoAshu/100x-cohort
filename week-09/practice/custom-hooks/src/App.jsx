@@ -1,9 +1,9 @@
-import FetchTodosHookDemo from './hook-demos/FetchTodosHookDemo'
+import FetchTodosDemo from './hook-demos/FetchTodosDemo'
 
 function App() {
     return (
         <>
-            <FetchTodosHookDemo />
+            <FetchTodosDemo />
         </>
     )
 }

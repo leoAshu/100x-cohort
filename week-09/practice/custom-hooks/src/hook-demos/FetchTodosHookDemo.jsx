@@ -1,7 +1,11 @@
 import useFetchTodos from '../hooks/useFetchTodos'
 
 const FetchTodosHookDemo = () => {
-    const todos = useFetchTodos()
+    const { todos, loading } = useFetchTodos()
+
+    if (loading) {
+        return <>Loading...</>
+    }
 
     return (
         <>

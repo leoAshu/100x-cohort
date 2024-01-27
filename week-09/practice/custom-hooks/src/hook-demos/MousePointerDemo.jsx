@@ -3,7 +3,7 @@ import useMousePointer from '../hooks/useMousePointer'
 const MousePointerDemo = () => {
     const position = useMousePointer()
 
-    return <>{`Your mouse position is \nx: ${position.x} \ny: ${position.y}`}</>
+    return <div>{`Your mouse position is \nx: ${position.x} \ny: ${position.y}`}</div>
 }
 
 export default MousePointerDemo

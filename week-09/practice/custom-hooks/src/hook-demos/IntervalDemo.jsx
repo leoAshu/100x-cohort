@@ -8,7 +8,7 @@ const IntervalDemo = () => {
         setCount((c) => c + 1)
     }, 1000)
 
-    return <>Timer is at {count}</>
+    return <div>Timer is at {count}</div>
 }
 
 export default IntervalDemo

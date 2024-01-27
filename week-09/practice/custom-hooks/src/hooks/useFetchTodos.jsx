@@ -13,12 +13,14 @@ const useFetchTodos = (seconds) => {
     }
 
     useEffect(() => {
-        setInterval(() => {
+        const id = setInterval(() => {
             setLoading(true)
             fetchData()
         }, seconds * 1000)
         fetchData()
-    }, [])
+
+        return () => clearInterval(id)
+    }, [seconds])
 
     return { todos, loading }
 }

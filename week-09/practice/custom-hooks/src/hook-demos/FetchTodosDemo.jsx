@@ -1,6 +1,7 @@
+import { memo } from 'react'
 import useFetchTodos from '../hooks/useFetchTodos'
 
-const FetchTodosDemo = () => {
+const FetchTodosDemo = memo(() => {
     const { todos, loading } = useFetchTodos(5)
 
     if (loading) {
@@ -14,9 +15,9 @@ const FetchTodosDemo = () => {
             ))}
         </>
     )
-}
+})
 
-function Track({ todo }) {
+const Track = memo(({ todo }) => {
     return (
         <div>
             {todo.title}
@@ -26,6 +27,6 @@ function Track({ todo }) {
             <br />
         </div>
     )
-}
+})
 
 export default FetchTodosDemo

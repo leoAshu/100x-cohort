@@ -1,10 +1,10 @@
-// const x: number = 1
-// console.log(x)
+const x: number = 1
+console.log(x)
 
-// const hello = (name: string) => {
-//     console.log(`Hello ${name}`)
-// }
-// hello('Ashutosh')
+const hello = (name: string) => {
+    console.log(`Hello ${name}`)
+}
+hello('Ashutosh')
 
 const sum = (a: number, b: number): number => {
     return a + b

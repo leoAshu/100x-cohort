@@ -20,3 +20,17 @@ const runAfter1s = (func: () => void) => {
     setTimeout(func, 1000)
 }
 runAfter1s(() => console.log('Hello there!'))
+
+interface User {
+    firstName: string
+    lastName: string
+    age: number
+}
+
+const isUserLegal = (user: User) => {
+    return user.age > 18
+}
+
+const helloUser = (user: User) => {
+    console.log(`Hello ${user.firstName}`)
+}

@@ -34,3 +34,17 @@ const isUserLegal = (user: User) => {
 const helloUser = (user: User) => {
     console.log(`Hello ${user.firstName}`)
 }
+
+type NumberOrStringArr = number[] | string[]
+const firstElement = (arr: NumberOrStringArr) => {
+    return arr[0]
+}
+// unable to infer what is the type of result if valid list provided
+// console.log(firstElement(['abx', 'cde']).toUpperCase())
+
+const genericFirstElement = <T>(arr: T[]) => {
+    return arr[0]
+}
+// fixes the issue above
+console.log(genericFirstElement<string>(['a', 'b', 'c']).toUpperCase())
+console.log(genericFirstElement<number>([1, 2, 3]).toFixed())

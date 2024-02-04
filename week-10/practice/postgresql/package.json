@@ -1,0 +1,19 @@
+{
+    "name": "postgresql",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "npx tsc -b",
+        "dev": "node dist/",
+        "start": "npm run build && npm run dev"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@types/pg": "^8.11.0",
+        "dotenv": "^16.4.1",
+        "pg": "^8.11.3"
+    }
+}

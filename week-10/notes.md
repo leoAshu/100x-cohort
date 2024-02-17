@@ -10,9 +10,12 @@
 ### Benefits
 
 -   Simpler syntax
+    -   converts objects to database queries under the hood
 -   Abstraction that provides a unified API irrespective of the DB
+    -   makes the code compatible with any type of database
 -   Type safety/Auto completion
 -   Automatic migrations
+    -   keeps a track of all the DDL queries used to reach the particular schema of a database
 
 ## Prisma
 

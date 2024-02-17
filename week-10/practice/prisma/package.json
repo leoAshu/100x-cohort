@@ -1,19 +1,19 @@
 {
-  "name": "prisma",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^20.11.16",
-    "prisma": "^5.9.1"
-  },
-  "dependencies": {
-    "@prisma/client": "^5.9.1"
-  }
+    "name": "prisma",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^20.11.16",
+        "prisma": "^5.9.1"
+    },
+    "dependencies": {
+        "@prisma/client": "^5.9.1"
+    }
 }

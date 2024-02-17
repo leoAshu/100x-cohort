@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient();
-
+const prisma = new PrismaClient()
 
 /*
  * Should insert into the users table
@@ -13,7 +12,15 @@ const prisma = new PrismaClient();
  * }
  */
 export async function createUser(username: string, password: string, name: string) {
-    
+    const user = await prisma.user.create({
+        data: {
+            username,
+            name,
+            password
+        }
+    })
+
+    return user
 }
 
 /*
@@ -25,5 +32,11 @@ export async function createUser(username: string, password: string, name: strin
  * }
  */
 export async function getUser(userId: number) {
-    
+    const user = await prisma.user.findFirst({
+        where: {
+            id: userId
+        }
+    })
+
+    return user
 }

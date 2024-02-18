@@ -24,6 +24,23 @@
 
 ### Popular serverless providers
 
-    -   AWS Lambda
-    -   Google Cloud Functions
-    -   Cloudflare Workers
+-   AWS Lambda
+-   Google Cloud Functions
+-   Cloudflare Workers
+
+## Cloudflare Workers
+
+-   do not use the Node.js runtime
+-   have their custom developed runtime called Workers runtime
+-   uses the V8 engine, similar to Chromium and Node.js
+
+### Isolates
+
+-   V8 orchestrates isolates
+-   isolates are lightweight contexts that provide your code with variables it can access and a safe environment to be executed within
+-   a single runtime can run hundreds or thoussands of isolates, seamlessly switching between them
+-   each isolate's memory is completed isolated, so each piece of code is protected from other untrusted or user-written code on the runtime
+-   isolates are also designed to start very quicky
+-   instead of creating a virtual machine for each function, an isolate is created within an existing environment
+-   this model eliminates the cold starts of the virtual machine model
+-   other serverless providers use containerized processes on contrary to Cloudflare Workers that use isolates

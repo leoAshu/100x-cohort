@@ -22,7 +22,8 @@
 -   when you can't anticipate the traffic and don't want to worry about autoscaling
 -   if you have very low traffic and want to optimize forn costs
 
--   popular serverless providers
+### Popular serverless providers
+
     -   AWS Lambda
     -   Google Cloud Functions
     -   Cloudflare Workers

@@ -34,8 +34,9 @@
 -   have their custom developed runtime called Workers runtime
 -   uses the V8 engine, similar to Chromium and Node.js
 
-### Isolates
+### How Cloudflare works?
 
+-   [Detailed Blog Post](https://developers.cloudflare.com/workers/reference/how-workers-works/#:~:text=Though)
 -   V8 orchestrates isolates
 -   isolates are lightweight contexts that provide your code with variables it can access and a safe environment to be executed within
 -   a single runtime can run hundreds or thoussands of isolates, seamlessly switching between them

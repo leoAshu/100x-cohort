@@ -1,5 +1,5 @@
 import { Hono } from 'hono'
-import { generateToken } from '../jwt'
+import { generateToken } from '../auth'
 import { getPrismaClient } from '../db'
 import { userSignupSchema, userSigninSchema } from '.'
 

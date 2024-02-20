@@ -22,6 +22,6 @@ model BlogPost {
   id        Int     @id  @default(autoincrement())
   title     String
   body      String
-  author    User    @relation(fields: [authorId], references: [id])
+  author    User?    @relation(fields: [authorId], references: [id])
   authorId  Int 
 }

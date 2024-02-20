@@ -1,5 +1,6 @@
 import zod from 'zod'
 import userRoute from './user'
+import postRoute from './post'
 
 const userSignupSchema = zod.object({
     username: zod.string().min(3).max(30),
@@ -12,4 +13,14 @@ const userSigninSchema = zod.object({
     password: zod.string()
 })
 
-export { userSignupSchema, userSigninSchema, userRoute }
+const createPostSchema = zod.object({
+    title: zod.string(),
+    body: zod.string()
+})
+
+const updatePostSchema = zod.object({
+    title: zod.string(),
+    body: zod.string()
+})
+
+export { userSignupSchema, userSigninSchema, userRoute, createPostSchema, updatePostSchema, postRoute }

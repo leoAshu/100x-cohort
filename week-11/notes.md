@@ -55,3 +55,4 @@
 -   the `buckets` have an associated url known as the origin url
 -   `Cloudfront` service is used to point a distribution to the origin url as the source of the distribution
 -   public access to the content is provided by the distribution url
+-   replicating the storage server is very costly as the service provides persistent storage, while CDNs like `Cloudfront` use caching to distribute the objects and clear the cache on long terms of inactivity

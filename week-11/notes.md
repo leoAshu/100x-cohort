@@ -45,3 +45,13 @@
 -   instead of creating a virtual machine for each function, an isolate is created within an existing environment
 -   this model eliminates the cold starts of the virtual machine model
 -   other serverless providers use containerized processes on contrary to Cloudflare Workers that use isolates
+
+## Deploying Frontends on AWS
+
+-   requires two key services
+    -   storage: `S3`
+    -   content delivery network: `CloudFront`
+-   `S3` acts as an object store that provides `buckets` to store objects like images, videos, scripts, etc
+-   the `buckets` have an associated url known as the origin url
+-   `Cloudfront` service is used to point a distribution to the origin url as the source of the distribution
+-   public access to the content is provided by the distribution url

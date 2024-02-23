@@ -6,7 +6,7 @@ import { authMiddleware } from '../auth'
 const postRoute = new Hono()
 
 postRoute.get('/', async (c) => {
-    const posts = await getPrismaClient(c).blogPost.findMany({})
+    const posts = await getPrismaClient(c).post.findMany({})
 
     return c.json({ posts })
 })
@@ -21,7 +21,7 @@ postRoute.post('/', authMiddleware, async (c) => {
         })
     }
 
-    const post = await getPrismaClient(c).blogPost.create({
+    const post = await getPrismaClient(c).post.create({
         data: {
             title: result.data.title,
             body: result.data.body,
@@ -37,7 +37,7 @@ postRoute.post('/', authMiddleware, async (c) => {
 
 postRoute.get('/:id', async (c) => {
     const id = Number(c.req.param('id'))
-    const post = await getPrismaClient(c).blogPost.findFirst({ where: { id } })
+    const post = await getPrismaClient(c).post.findFirst({ where: { id } })
 
     return c.json({ post })
 })
@@ -53,7 +53,7 @@ postRoute.put('/:id', async (c) => {
         })
     }
 
-    const post = await getPrismaClient(c).blogPost.update({
+    const post = await getPrismaClient(c).post.update({
         data: {
             title: result.data.title,
             body: result.data.body
@@ -72,7 +72,7 @@ postRoute.put('/:id', async (c) => {
 postRoute.delete('/:id', async (c) => {
     try {
         const id = Number(c.req.param('id'))
-        const post = await getPrismaClient(c).blogPost.delete({ where: { id } })
+        const post = await getPrismaClient(c).post.delete({ where: { id } })
 
         return c.json({ message: 'Post deleted!' })
     } catch (err) {
